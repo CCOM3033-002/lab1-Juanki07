@@ -1,55 +1,49 @@
 /*
-
-Juan Carlos Velez Reyes
-CCOM3033-002
-Lab 01
-
-This program calculates the Gross and Net Box
-Office Profit and the Distributer's Profit of a movie playing in the theater.
-
+Lab01
+Nombre: Juan Carlos Velez Reyes
+Núm. Est: 801-21-2150
+Colaboraciones:
+N/A
 */
 
-
 #include <iostream>
+#include <iomanip>  // For formatting output
 #include <string>
-#include <cmath>
 
 using namespace std;
 
-int main(){
+int main() {
+    // Declaring variables
+    string movie; 
+    int adultTickets, childTickets;
+    const double adultTicketPrice = 10.00;
+    const double childTicketPrice = 6.00;
+    const double DistributorPay = 0.2; // keeps 20%
 
-/* gbox = gross box office
-   nbox = net box office 
-   ag = amount paid to distributor
-   ats = adult tickets sold
-   cts = child tickets sold
-   atsn = number of ats
-   ctsn = number of cts
-*/
-    double ats, cts, gbox, nbox, ad, atsn, ctsn;
-    string movie;
-
-    cout << "Hello! What movie do you want to watch?: " << endl;
+    // input
+    cout << "Enter the name of the movie: ";
     getline(cin, movie);
+    
+    cout << "Enter the amount of adult tickets sold: ";
+    cin >> adultTickets;
+    
+    cout << "Enter the amount of child tickets sold: ";
+    cin >> childTickets;
 
-    cout << "How many adult tickets were sold?: " << endl;
-    cin >> atsn;
+    // Calculations
+    double grossBoxProfit = (adultTickets * adultTicketPrice) + (childTickets * childTicketPrice);
+    double netBoxProfit = grossBoxProfit * DistributorPay;
+    double distributorAmount = grossBoxProfit - netBoxProfit;
 
-    cout << "How many child tickets were sold?: " << endl;
-    cin >> ctsn;
-
-    ats = 10.0 * atsn;
-    cts = 6.0 * ctsn;
-    gbox = ats + cts; // adult and child tickets sold sum
-    nbox = gbox * 0.2; // 20% of gbox
-    ad = gbox - nbox; // gross minus net
-
-    cout << "Movie name: \t\t\t" << movie << endl;
-    cout << "Adult Tickets Sold: \t\t" << ats << endl;
-    cout << "Child Tickets Sold: \t\t" << cts << endl;
-    cout << "Gross Box Office Profit: \t$" << gbox << endl;
-    cout << "Net Box Office Profit: \t $" << nbox << endl;
-    cout << "Amount Paid to Distributior: \t$"<< ad << endl;
+    // output
+    cout << "\nThis program calculates the Gross and Net Box Office Profit\n"
+        << "and the Distributor's Profit of a movie playing in the theater.\n\n";
+    cout << left << setw(30) << "Movie Name:" << " \"" << movie << "\"\n";
+    cout << left << setw(30) << "Adult Tickets Sold:" << adultTickets << endl;
+    cout << left << setw(30) << "Child Tickets Sold:" << childTickets << endl;
+    cout << left << setw(30) << "Gross Box Office Profit:" << "$" << right << setw(8) << fixed << setprecision(2) << grossBoxProfit << endl;
+    cout << left << setw(30) << "Net Box Office Profit:" << "$" << right << setw(8) << fixed << setprecision(2) << netBoxProfit << endl;
+    cout << left << setw(30) << "Amount Paid to Distributor:" << "$" << right << setw(8) << fixed << setprecision(2) << distributorAmount << endl;
 
     return 0;
 }
